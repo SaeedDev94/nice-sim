@@ -33,7 +33,7 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file("/tmp/xray.jks")
+            storeFile = file("/tmp/nice-sim.jks")
             storePassword = System.getenv("KS_PASSWORD")
             keyAlias = System.getenv("KEY_ALIAS")
             keyPassword = System.getenv("KEY_PASSWORD")
