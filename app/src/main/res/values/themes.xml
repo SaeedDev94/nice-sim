@@ -1,0 +1,3 @@
+<resources>
+    <style name="Theme.NiceSIM" parent="Theme.AppCompat.DayNight" />
+</resources>
