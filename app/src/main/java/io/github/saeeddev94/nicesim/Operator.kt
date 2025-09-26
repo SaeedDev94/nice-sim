@@ -16,7 +16,7 @@ enum class Operator(val key: String, val value: String) {
             val keys = entries
             val cmd = keys.joinToString(" && ") { "setprop ${it.key} ${it.value}" }
             Shell.cmd(cmd).exec()
-            Shell.cmd("cmd wifi force-country-code enabled US")
+            Shell.cmd("cmd wifi force-country-code enabled US").exec()
         }
     }
 }
