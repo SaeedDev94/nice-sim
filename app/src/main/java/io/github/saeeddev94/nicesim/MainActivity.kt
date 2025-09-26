@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
             val keys = Operator.entries
             val cmd = keys.joinToString(" && ") { "setprop ${it.key} ${it.value}" }
             Shell.cmd(cmd).exec()
+            Shell.cmd("cmd wifi force-country-code enabled US")
             withContext(Dispatchers.Main) {
                 getProps(false)
                 Toast.makeText(
