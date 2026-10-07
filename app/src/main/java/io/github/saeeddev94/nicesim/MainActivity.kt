@@ -60,10 +60,13 @@ class MainActivity : AppCompatActivity() {
             val keys = Operator.entries
             val cmd = keys.joinToString(" && ") { "getprop ${it.key}" }
             val result = Shell.cmd(cmd).exec()
+            val wifiCountry = Shell.cmd("cmd wifi get-country-code").exec()
+                .out.firstOrNull()?.substringAfter("=")?.trim().orEmpty()
             withContext(Dispatchers.Main) {
                 val status = findViewById<TextView>(R.id.status)
                 status.text = keys
                     .mapIndexed { index, operator -> "${operator.key}: ${result.out[index]}" }
+                    .plus("wifi.country-code: $wifiCountry")
                     .joinToString("\n")
                 if (toast) {
                     Toast.makeText(
