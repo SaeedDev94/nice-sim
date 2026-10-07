@@ -22,7 +22,7 @@ class Prefs(context: Context) {
         set(value) = prefs.edit { putString(WIFI_COUNTRY, value) }
 
     companion object {
-        val WIFI_COUNTRIES = listOf("US", "AU")
+        val WIFI_COUNTRIES = listOf("US", "GB", "AU")
 
         private const val SIM_NUMERIC = "sim_numeric"
         private const val WIFI_COUNTRY_CODE = "wifi_country_code"
