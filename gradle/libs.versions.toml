@@ -2,10 +2,12 @@
 agp = "9.4.1"
 kotlin = "2.4.20"
 androidxAppCompat = "1.8.0"
+googleMaterial = "1.14.0"
 libsuCore = "5.2.2"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
+google-material = { group = "com.google.android.material", name = "material", version.ref = "googleMaterial" }
 topjohnwu-libsu-core = { module = "com.github.topjohnwu.libsu:core", version.ref = "libsuCore" }
 
 [plugins]

@@ -51,5 +51,6 @@ kotlin {
 
 dependencies {
     implementation(libs.androidx.appcompat)
+    implementation(libs.google.material)
     implementation(libs.topjohnwu.libsu.core)
 }

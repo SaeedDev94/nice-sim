@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.radiobutton.MaterialRadioButton
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<RadioGroup>(R.id.wifiCountry).apply {
             Prefs.WIFI_COUNTRIES.forEach { country ->
-                addView(RadioButton(context).apply {
+                addView(MaterialRadioButton(context).apply {
                     id = View.generateViewId()
                     text = country
                     isChecked = country == prefs.wifiCountry
