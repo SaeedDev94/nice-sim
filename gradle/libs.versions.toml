@@ -1,13 +1,14 @@
 [versions]
-agp = "8.11.1"
-kotlin = "2.2.20"
-appcompat = "1.7.1"
+agp = "9.4.1"
+kotlin = "2.4.20"
+androidxAppCompat = "1.8.0"
 libsuCore = "5.2.2"
 
 [libraries]
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
 topjohnwu-libsu-core = { module = "com.github.topjohnwu.libsu:core", version.ref = "libsuCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
