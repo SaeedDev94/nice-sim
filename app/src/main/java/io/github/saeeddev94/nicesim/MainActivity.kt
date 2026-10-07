@@ -1,15 +1,13 @@
 package io.github.saeeddev94.nicesim
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.CheckBox
-import android.widget.RadioGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.radiobutton.MaterialRadioButton
+import com.google.android.material.materialswitch.MaterialSwitch
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,27 +20,36 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        findViewById<CheckBox>(R.id.simNumeric).apply {
+        findViewById<MaterialSwitch>(R.id.simNumeric).apply {
             isChecked = prefs.simNumeric
             setOnCheckedChangeListener { _, isChecked -> prefs.simNumeric = isChecked }
         }
-        findViewById<CheckBox>(R.id.wifiCountryCode).apply {
-            isChecked = prefs.wifiCountryCode
-            setOnCheckedChangeListener { _, isChecked -> prefs.wifiCountryCode = isChecked }
-        }
-        findViewById<RadioGroup>(R.id.wifiCountry).apply {
-            Prefs.WIFI_COUNTRIES.forEach { country ->
-                addView(MaterialRadioButton(context).apply {
-                    id = View.generateViewId()
+        findViewById<LinearLayout>(R.id.wifiCountry).apply {
+            val countries = Prefs.WIFI_COUNTRIES
+            val switches = countries.map { country ->
+                MaterialSwitch(context).apply {
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                    )
                     text = country
                     isChecked = country == prefs.wifiCountry
-                    setOnCheckedChangeListener { _, isChecked ->
-                        if (isChecked) prefs.wifiCountry = country
+                }.also { addView(it) }
+            }
+            switches.forEachIndexed { index, switch ->
+                val country = countries[index]
+                switch.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        prefs.wifiCountry = country
+                        switches.filter { it !== switch }.forEach { it.isChecked = false }
+                    } else if (country == prefs.wifiCountry) {
+                        // keep exactly one option selected, like a radio group
+                        switch.isChecked = true
                     }
-                })
+                }
             }
         }
-        findViewById<CheckBox>(R.id.applyOnBoot).apply {
+        findViewById<MaterialSwitch>(R.id.applyOnBoot).apply {
             isChecked = prefs.applyOnBoot
             setOnCheckedChangeListener { _, isChecked -> prefs.applyOnBoot = isChecked }
         }

@@ -3,6 +3,7 @@
     <string name="set">SET</string>
     <string name="get">GET</string>
     <string name="sim_numeric">Change SIM numeric</string>
-    <string name="wifi_country_code">Change WiFi country code</string>
+    <string name="wifi_country_code">WiFi country code</string>
+    <string name="settings">Settings</string>
     <string name="apply_on_boot">Apply on boot</string>
 </resources>
