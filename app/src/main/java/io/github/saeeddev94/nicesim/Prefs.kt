@@ -17,8 +17,15 @@ class Prefs(context: Context) {
         get() = prefs.getBoolean(WIFI_COUNTRY_CODE, true)
         set(value) = prefs.edit { putBoolean(WIFI_COUNTRY_CODE, value) }
 
-    private companion object {
-        const val SIM_NUMERIC = "sim_numeric"
-        const val WIFI_COUNTRY_CODE = "wifi_country_code"
+    var wifiCountry: String
+        get() = prefs.getString(WIFI_COUNTRY, WIFI_COUNTRIES.first())!!
+        set(value) = prefs.edit { putString(WIFI_COUNTRY, value) }
+
+    companion object {
+        val WIFI_COUNTRIES = listOf("US", "AU")
+
+        private const val SIM_NUMERIC = "sim_numeric"
+        private const val WIFI_COUNTRY_CODE = "wifi_country_code"
+        private const val WIFI_COUNTRY = "wifi_country"
     }
 }

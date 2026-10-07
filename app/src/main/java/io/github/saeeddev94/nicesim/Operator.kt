@@ -15,7 +15,7 @@ enum class Operator(val key: String, val value: String) {
         fun set(prefs: Prefs) {
             buildList {
                 if (prefs.simNumeric) addAll(entries.map { "setprop ${it.key} ${it.value}" })
-                if (prefs.wifiCountryCode) add("cmd wifi force-country-code enabled US")
+                if (prefs.wifiCountryCode) add("cmd wifi force-country-code enabled ${prefs.wifiCountry}")
             }.takeIf { it.isNotEmpty() }?.joinToString(" && ")?.let { cmd ->
                 Shell.cmd(cmd).exec()
             }

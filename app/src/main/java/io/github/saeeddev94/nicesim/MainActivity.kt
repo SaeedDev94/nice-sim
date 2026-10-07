@@ -1,8 +1,11 @@
 package io.github.saeeddev94.nicesim
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +29,18 @@ class MainActivity : AppCompatActivity() {
         findViewById<CheckBox>(R.id.wifiCountryCode).apply {
             isChecked = prefs.wifiCountryCode
             setOnCheckedChangeListener { _, isChecked -> prefs.wifiCountryCode = isChecked }
+        }
+        findViewById<RadioGroup>(R.id.wifiCountry).apply {
+            Prefs.WIFI_COUNTRIES.forEach { country ->
+                addView(RadioButton(context).apply {
+                    id = View.generateViewId()
+                    text = country
+                    isChecked = country == prefs.wifiCountry
+                    setOnCheckedChangeListener { _, isChecked ->
+                        if (isChecked) prefs.wifiCountry = country
+                    }
+                })
+            }
         }
         findViewById<Button>(R.id.get).setOnClickListener {
             getProps()

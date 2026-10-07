@@ -27,6 +27,13 @@
         android:layout_height="wrap_content"
         android:text="@string/wifi_country_code" />
 
+    <RadioGroup
+        android:id="@+id/wifiCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:orientation="horizontal" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
