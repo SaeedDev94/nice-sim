@@ -4,4 +4,5 @@
     <string name="get">GET</string>
     <string name="sim_numeric">Change SIM numeric</string>
     <string name="wifi_country_code">Change WiFi country code</string>
+    <string name="apply_on_boot">Apply on boot</string>
 </resources>

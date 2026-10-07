@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
                 })
             }
         }
+        findViewById<CheckBox>(R.id.applyOnBoot).apply {
+            isChecked = prefs.applyOnBoot
+            setOnCheckedChangeListener { _, isChecked -> prefs.applyOnBoot = isChecked }
+        }
         findViewById<Button>(R.id.get).setOnClickListener {
             getProps()
         }

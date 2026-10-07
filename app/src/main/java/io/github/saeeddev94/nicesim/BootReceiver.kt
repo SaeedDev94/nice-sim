@@ -15,9 +15,11 @@ class BootReceiver : BroadcastReceiver() {
     @SuppressLint("UnsafeProtectedBroadcastReceiver")
     override fun onReceive(context: Context?, intent: Intent?) {
         if (context == null || intent == null) return
+        val prefs = Prefs(context)
+        if (!prefs.applyOnBoot) return
         val pendingResult = goAsync()
         CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
-            Operator.set(Prefs(context))
+            Operator.set(prefs)
             withContext(Dispatchers.Main) {
                 pendingResult.finish()
             }

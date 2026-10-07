@@ -9,6 +9,10 @@ class Prefs(context: Context) {
     private val prefs: SharedPreferences =
         context.getSharedPreferences("settings", Context.MODE_PRIVATE)
 
+    var applyOnBoot: Boolean
+        get() = prefs.getBoolean(APPLY_ON_BOOT, true)
+        set(value) = prefs.edit { putBoolean(APPLY_ON_BOOT, value) }
+
     var simNumeric: Boolean
         get() = prefs.getBoolean(SIM_NUMERIC, true)
         set(value) = prefs.edit { putBoolean(SIM_NUMERIC, value) }
@@ -27,5 +31,6 @@ class Prefs(context: Context) {
         private const val SIM_NUMERIC = "sim_numeric"
         private const val WIFI_COUNTRY_CODE = "wifi_country_code"
         private const val WIFI_COUNTRY = "wifi_country"
+        private const val APPLY_ON_BOOT = "apply_on_boot"
     }
 }
