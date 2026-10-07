@@ -2,4 +2,6 @@
     <string name="app_name">Nice SIM</string>
     <string name="set">SET</string>
     <string name="get">GET</string>
+    <string name="sim_numeric">Change SIM numeric</string>
+    <string name="wifi_country_code">Change WiFi country code</string>
 </resources>

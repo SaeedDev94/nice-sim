@@ -12,11 +12,13 @@ enum class Operator(val key: String, val value: String) {
     SimNumeric("gsm.sim.operator.numeric", "310260,310260");
 
     companion object {
-        fun set() {
-            val keys = entries
-            val cmd = keys.joinToString(" && ") { "setprop ${it.key} ${it.value}" }
-            Shell.cmd(cmd).exec()
-            Shell.cmd("cmd wifi force-country-code enabled US").exec()
+        fun set(prefs: Prefs) {
+            buildList {
+                if (prefs.simNumeric) addAll(entries.map { "setprop ${it.key} ${it.value}" })
+                if (prefs.wifiCountryCode) add("cmd wifi force-country-code enabled US")
+            }.takeIf { it.isNotEmpty() }?.joinToString(" && ")?.let { cmd ->
+                Shell.cmd(cmd).exec()
+            }
         }
     }
 }

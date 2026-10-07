@@ -17,7 +17,7 @@ class BootReceiver : BroadcastReceiver() {
         if (context == null || intent == null) return
         val pendingResult = goAsync()
         CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
-            Operator.set()
+            Operator.set(Prefs(context))
             withContext(Dispatchers.Main) {
                 pendingResult.finish()
             }

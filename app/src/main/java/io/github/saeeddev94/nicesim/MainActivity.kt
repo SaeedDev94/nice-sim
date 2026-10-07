@@ -2,6 +2,7 @@ package io.github.saeeddev94.nicesim
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,9 +14,19 @@ import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
+    private val prefs by lazy { Prefs(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        findViewById<CheckBox>(R.id.simNumeric).apply {
+            isChecked = prefs.simNumeric
+            setOnCheckedChangeListener { _, isChecked -> prefs.simNumeric = isChecked }
+        }
+        findViewById<CheckBox>(R.id.wifiCountryCode).apply {
+            isChecked = prefs.wifiCountryCode
+            setOnCheckedChangeListener { _, isChecked -> prefs.wifiCountryCode = isChecked }
+        }
         findViewById<Button>(R.id.get).setOnClickListener {
             getProps()
         }
@@ -50,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setProps() {
         lifecycleScope.launch {
-            Operator.set()
+            Operator.set(prefs)
             withContext(Dispatchers.Main) {
                 getProps(false)
                 Toast.makeText(
